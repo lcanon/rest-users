@@ -16,7 +16,6 @@ public class UserService {
         String passwordEncrypted = DigestUtils
             .md5Hex(user.password).toUpperCase();
         user.password = passwordEncrypted;
-        user.role = "user";
         user.persist();
         return user;
     }
