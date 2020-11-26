@@ -23,9 +23,6 @@ public class User extends PanacheEntity {
     @NotNull
     public String password;
 
-    @Roles
-    public String role;
-
     // tag::adocSkip[]
     @Override
     public String toString() {
@@ -33,7 +30,6 @@ public class User extends PanacheEntity {
             "id=" + id +
             ", name='" + username + '\'' +
             ", password='" + password + '\'' +
-            ", role='" + role + '\'' +
             '}';
     }
 

@@ -9,6 +9,7 @@ import javax.annotation.security.PermitAll;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.validation.Valid;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -28,7 +29,6 @@ import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 
 @Path("/api/users")
 @Produces(APPLICATION_JSON)
-@ApplicationScoped
 public class UserResource {
 
     @Inject
@@ -40,7 +40,6 @@ public class UserResource {
     @Counted(name = "countCreateUser", description = "Counts how many times the createUser method has been invoked")
     @Timed(name = "timeCreateUser", description = "Times how long it takes to invoke the createUser method", unit = MetricUnits.MILLISECONDS)
     // end::adocMetrics[]
-    @PermitAll
     @POST
     public Response createUser(@RequestBody(required = true, content = @Content(mediaType = APPLICATION_JSON, schema = @Schema(implementation = User.class)))  @Valid User user, @Context UriInfo uriInfo) {
         user = service.persistUser(user);
@@ -54,7 +53,6 @@ public class UserResource {
     @Timed(name = "timeLoginUser", description = "Times how long it takes to invoke the loginUser method", unit = MetricUnits.MILLISECONDS)
     // end::adocMetrics[]
     @POST
-    @PermitAll
     @Path("/login")
     public Response loginUser(@RequestBody(required = true, content = @Content(mediaType = APPLICATION_JSON, schema = @Schema(implementation = User.class)))  @Valid User user) {
         User foundUser = service.findUser(user);
@@ -62,6 +60,18 @@ public class UserResource {
             return Response.status(Status.FORBIDDEN).build();
         }
         return Response.ok(foundUser).build();
+    }
+
+    @Operation(summary = "Health check")
+    @APIResponse(responseCode = "200", content = @Content(mediaType = APPLICATION_JSON))
+    // tag::adocMetrics[]
+    @Counted(name = "countHealthCheck", description = "Counts how many times the healthCheck method has been invoked")
+    @Timed(name = "timeHealthCheck", description = "Times how long it takes to invoke the healthCheck method", unit = MetricUnits.MILLISECONDS)
+    // end::adocMetrics[]
+    @GET
+    @Path("/health")
+    public Response healthCheck() {
+        return Response.ok().build();
     }
 
 }
