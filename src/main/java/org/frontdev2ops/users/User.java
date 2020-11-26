@@ -1,21 +1,14 @@
 // tag::adocEntity[]
 package org.frontdev2ops.users;
 
-import io.quarkus.elytron.security.common.BcryptUtil;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import io.quarkus.security.jpa.Password;
 import io.quarkus.security.jpa.Roles;
 import io.quarkus.security.jpa.UserDefinition;
 import io.quarkus.security.jpa.Username;
-import org.eclipse.microprofile.openapi.annotations.media.Schema;
-
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import java.util.Random;
 
 @Entity
 @Table(name = "users")
@@ -42,6 +35,10 @@ public class User extends PanacheEntity {
             ", password='" + password + '\'' +
             ", role='" + role + '\'' +
             '}';
+    }
+
+    public static User findByUsernameAndPassword(String username, String password) {
+        return find("username = ?1 and password = ?2", username, password).firstResult();
     }
     // end::adocSkip[]
 }
