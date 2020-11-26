@@ -43,7 +43,7 @@ public class UserResource {
 
 
     @Operation(summary = "Creates a valid user")
-    @APIResponse(responseCode = "201", description = "The URI of the created user", content = @Content(mediaType = APPLICATION_JSON, schema = @Schema(implementation = URI.class)))
+    @APIResponse(responseCode = "200", description = "The URI of the created user", content = @Content(mediaType = APPLICATION_JSON, schema = @Schema(implementation = URI.class)))
     // tag::adocMetrics[]
     @Counted(name = "countCreateUser", description = "Counts how many times the createUser method has been invoked")
     @Timed(name = "timeCreateUser", description = "Times how long it takes to invoke the createUser method", unit = MetricUnits.MILLISECONDS)
