@@ -52,8 +52,7 @@ public class UserResource {
     @POST
     public Response createUser(@RequestBody(required = true, content = @Content(mediaType = APPLICATION_JSON, schema = @Schema(implementation = User.class)))  @Valid User user, @Context UriInfo uriInfo) {
         user = service.persistUser(user);
-        UriBuilder builder = uriInfo.getAbsolutePathBuilder().path(Long.toString(user.id));
-        return Response.created(builder.build()).build();
+        return Response.ok(user).build();
     }
 
 }
