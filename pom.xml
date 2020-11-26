@@ -2,14 +2,14 @@
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>frontdev2ops</groupId>
+  <groupId>org.frontdev2ops</groupId>
   <artifactId>rest-users</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <properties>
     <surefire-plugin.version>2.22.1</surefire-plugin.version>
-    <maven.compiler.target>11</maven.compiler.target>
+    <maven.compiler.target>1.8</maven.compiler.target>
     <quarkus.platform.version>1.9.2.Final</quarkus.platform.version>
-    <maven.compiler.source>11</maven.compiler.source>
+    <maven.compiler.source>1.8</maven.compiler.source>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <quarkus.platform.artifact-id>quarkus-universe-bom</quarkus.platform.artifact-id>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -66,6 +66,21 @@
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-junit5</artifactId>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse.microprofile.metrics</groupId>
+      <artifactId>microprofile-metrics-api</artifactId>
+      <version>2.3</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>commons-codec</groupId>
+      <artifactId>commons-codec</artifactId>
+      <version>1.15</version>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-security-jpa</artifactId>
     </dependency>
   </dependencies>
   <build>
