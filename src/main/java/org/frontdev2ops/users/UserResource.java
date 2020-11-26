@@ -41,7 +41,6 @@ public class UserResource {
     @Inject
     UserService service;
 
-
     @Operation(summary = "Creates a valid user")
     @APIResponse(responseCode = "200", description = "The URI of the created user", content = @Content(mediaType = APPLICATION_JSON, schema = @Schema(implementation = URI.class)))
     // tag::adocMetrics[]
